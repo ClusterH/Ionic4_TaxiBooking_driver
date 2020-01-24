@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="dismiss()">
+      <ion-button color="dark">
+        <ion-label text-capitalize>Cancel</ion-label>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="updateProfileDetails()">
+      <ion-button color="dark">
+        <ion-label text-capitalize class="done">Done</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="user" class="contentBgColor">
+  <div class="profileHeader bgWhite">
+    <div class="editPhoto">
+      <ion-avatar class="profileImage relative" (click)="editPhoto()">
+        <img [src]="user.profileImg" />
+        <ion-icon name="camera" color="primary" class="iconFontSize cameraIcon"></ion-icon>
+      </ion-avatar>
+
+      <ion-button fill="clear" (click)="editPhoto()" no-margin>
+        <ion-label color="secondary" text-capitalize class="fontSmall">Edit photo</ion-label>
+      </ion-button>
+    </div>
+
+    <div>
+      <ion-item class="profileInput" margin-start>
+        <ion-input [(ngModel)]="user.name" placeholder="Full Name"></ion-input>
+      </ion-item>
+    </div>
+
+  </div>
+
+  <ion-list no-margin margin-top>
+
+    <!---Phone Number--->
+
+    <ion-row class="detailsItems">
+      <ion-col>
+        <h6 class="input-labels">Phone Number</h6>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="user.phone" placeholder="Enter Number"></ion-input>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row class="detailsItems">
+      <ion-col>
+        <h6 class="input-labels">Email</h6>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="user.email" placeholder="Email"></ion-input>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row class="detailsItems">
+      <ion-col>
+        <h6 class="input-labels">Gender</h6>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="user.gender" placeholder="Gender"></ion-input>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row class="detailsItems">
+      <ion-col>
+        <h6 class="input-labels">Birthday</h6>
+      </ion-col>
+      <ion-col>
+        <ion-input [(ngModel)]="user.birthday" placeholder="Birthday"></ion-input>
+      </ion-col>
+    </ion-row>
+
+
+  </ion-list>
+</ion-content>

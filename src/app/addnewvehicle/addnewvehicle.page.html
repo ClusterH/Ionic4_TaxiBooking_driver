@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title text-center color="dark">Add new vehicle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form class="form" [formGroup]="validations_form"  (ngSubmit)="completeAddVehicle(validations_form.value)">
+    <div padding-top>
+      <ion-list>
+        <ion-list-header text-uppercase>Vehicle Model</ion-list-header>
+        <ion-card>
+          <ion-item>
+            <ion-select [interfaceOptions]="customAlertOptions" interface="popover" placeholder="Select Vehicle" formControlName="vehicle_info" >
+              <ion-select-option  value="{{selectData.model}}" *ngFor=" let selectData of ( models | async ); let  i of index" >{{selectData.model}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header text-uppercase>Year</ion-list-header>
+        <ion-card>
+          <ion-item>
+            <ion-select [interfaceOptions]="customAlertOptions" interface="popover" placeholder="Select Year" formControlName="year_info">
+              <ion-select-option value={{selectData}} *ngFor="let selectData of year_data; let  i of index">{{selectData}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header text-uppercase>Color</ion-list-header>
+        <ion-card>
+          <ion-item>
+            <ion-select [interfaceOptions]="customAlertOptions" interface="popover" placeholder="Select Color" formControlName="color_info">
+              <ion-select-option value={{selectData}} *ngFor="let selectData of color_data; let  i of index">{{selectData}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header text-uppercase>Booking Type</ion-list-header>
+        <ion-card>
+          <ion-item>
+            <ion-select [interfaceOptions]="customAlertOptions" interface="popover" placeholder="Select Booking Type" formControlName="booking_type_info">
+              <ion-select-option value={{selectData}} *ngFor="let selectData of booking_type_data; let  i of index">{{selectData}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+      
+      <ion-list>
+        <ion-list-header text-uppercase>License PLate</ion-list-header>
+        <ion-card>
+          <ion-item>
+            <ion-input type="text"  placeholder="License PLate No" formControlName="license_info"></ion-input>
+          </ion-item>
+        </ion-card>
+      </ion-list>
+    </div>
+    <ion-button expand="full" type="submit" [disabled]="!validations_form.valid" class="submit_button" padding-vertical >COMPLETE
+        <span *ngIf="spinner">
+          <ion-spinner name="lines"></ion-spinner>
+        </span>
+      </ion-button>
+  </form>
+  
+</ion-content>
+<!-- <ion-footer (click)="completeAddVehicle()">
+  <div class="footer_center_item">
+    <div class="footer_center_item_background">
+      <h2 class="icon_avatar1" text-uppercase> COMPLETE</h2>
+    </div>
+  </div>
+</ion-footer> -->
+
+
+
+<!-- [(ngModel)]="item.name" (ionChange)="getValue(item.name)" -->

@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Setting</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contentBgColor" *ngIf="driverDetails">
+  <ion-item lines="none" padding-vertical (click)="goToProfile()">
+    <ion-avatar slot="start" class="profile">
+      <!-- <img [src]="driverDetails.profileImage"> -->
+      <img [src]="auth.loggedInUser.profileImg" />
+
+    </ion-avatar>
+    <div margin-start>
+      <h4 class="textBold" no-margin>{{driverDetails.driverName}}</h4>
+      <span class="lightTextColor drivermemberType">{{driverDetails.memberType}}</span>
+
+    </div>
+    <img src="assets/arrow-point-to-right.png" slot="end" class="rightArrow">
+  </ion-item>
+
+  <ion-list no-margin>
+    <ion-item *ngFor=" let doc of driverDocuments" (click)="documentPage(doc.page)">
+      <ion-icon name="{{doc.icon}}" slot="start" *ngIf="!doc.image" class="docIcon"
+        [ngStyle]="{'background':doc.background}"></ion-icon>
+      <img [src]="doc.image" alt="" slot="start" class="imageIcon docIcon" *ngIf="!doc.icon"
+        [ngStyle]="{'background':doc.background}">
+      {{doc.title}}
+      <img src="assets/arrow-point-to-right.png" slot="end" class="rightArrow">
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list margin-vertical>
+    <ion-item *ngFor=" let otherDoc of otherDetails" (click)="otherPage(otherDoc.page)">
+      <ion-icon name="{{otherDoc.icon}}" slot="start" *ngIf="!otherDoc.image" class="docIcon"
+        [ngStyle]="{'background':otherDoc.background}"></ion-icon>
+      <img [src]="otherDoc.image" alt="" slot="start" class="imageIcon docIcon" *ngIf="!otherDoc.icon"
+        [ngStyle]="{'background':otherDoc.background}">
+      {{otherDoc.title}}
+      <img src="assets/arrow-point-to-right.png" slot="end" class="rightArrow">
+    </ion-item>
+  </ion-list>
+</ion-content>

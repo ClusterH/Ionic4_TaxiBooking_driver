@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title text-center color="dark">Vehicle Management</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="driver_info.avata_img">
+      </ion-avatar>
+      <ion-label>
+        <h3>{{driver_info.name}}</h3>
+        <!-- <p>Dec 10, 2019</p> -->
+      </ion-label>
+    </ion-item>
+  
+    <img [src]="vehicle_ability_info.model_img" >
+    <ion-card-header>
+      <ion-card-title text-uppercase>{{driver_info.model}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="padding-top: 0px!important; font-size: 30px !important;">
+      <p>License No: {{driver_info.license}}</p>
+      <p>Speed: {{vehicle_ability_info.speed}}km/h&nbsp;&nbsp;&nbsp; Seat: {{vehicle_ability_info.member}}</p>
+      <p>Price: {{vehicle_ability_info.price}}$/km</p> 
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <div class="footer_center_item">
+    <div class="footer_center_item_background" (click)="openpageTRansition()">
+      <ion-avatar class="avatar_class1">
+        <ion-icon name="add" expand="icon-only" class="icon_avatar1"></ion-icon>
+      </ion-avatar>
+    </div>
+  </div>
+</ion-footer>

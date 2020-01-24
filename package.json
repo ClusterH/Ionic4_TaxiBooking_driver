@@ -1,0 +1,133 @@
+{
+  "name": "ionDriver",
+  "version": "1.4.1",
+  "author": "Enappd",
+  "homepage": "https://enappd.com",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@agm/core": "^1.1.0",
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14",
+    "@angular/fire": "^5.2.3",
+    "@angular/forms": "^8.2.14",
+    "@angular/platform-browser": "^8.2.14",
+    "@angular/platform-browser-dynamic": "^8.2.14",
+    "@angular/router": "^8.2.14",
+    "@ionic-native/call-number": "^5.19.1",
+    "@ionic-native/camera": "^5.19.1",
+    "@ionic-native/core": "^5.19.1",
+    "@ionic-native/geolocation": "^5.19.1",
+    "@ionic-native/in-app-browser": "^5.19.1",
+    "@ionic-native/launch-navigator": "^5.19.1",
+    "@ionic-native/native-page-transitions": "^5.19.1",
+    "@ionic-native/screen-orientation": "^5.19.1",
+    "@ionic-native/social-sharing": "^5.19.1",
+    "@ionic-native/splash-screen": "^5.19.1",
+    "@ionic-native/status-bar": "^5.19.1",
+    "@ionic/angular": "^4.11.7",
+    "agm-direction": "^0.7.9",
+    "angular2-uuid": "^1.1.1",
+    "call-number": "^1.0.1",
+    "caniuse-lite": "^1.0.30001019",
+    "com.telerik.plugins.nativepagetransitions": "^0.6.5",
+    "cordova-android": "^8.1.0",
+    "cordova-ios": "~4.5.5",
+    "cordova-plugin-actionsheet": "^2.3.3",
+    "cordova-plugin-camera": "^4.1.0",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-dialogs": "^2.0.1",
+    "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-plugin-inappbrowser": "^3.0.0",
+    "cordova-plugin-ionic-keyboard": "^2.2.0",
+    "cordova-plugin-ionic-webview": "^4.1.3",
+    "cordova-plugin-screen-orientation": "^3.0.1",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "cordova-plugin-x-socialsharing": "^5.6.3",
+    "core-js": "^2.6.11",
+    "es6-promise-plugin": "^4.2.2",
+    "firebase": "^5.10.1",
+    "mx.ferreyra.callnumber": "0.0.2",
+    "ng-packagr": "^5.7.1",
+    "ngx-rating": "0.0.9",
+    "rxjs": "^6.5.4",
+    "tslib": "^1.9.0",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "^5.0.4",
+    "zone.js": "~0.9.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/architect": "^0.802.2",
+    "@angular-devkit/build-angular": "^0.803.21",
+    "@angular-devkit/core": "^8.3.21",
+    "@angular-devkit/schematics": "^8.3.21",
+    "@angular/cli": "~8.2.2",
+    "@angular/compiler": "^8.2.14",
+    "@angular/compiler-cli": "^8.2.14",
+    "@angular/language-service": "^8.2.14",
+    "@ionic/angular-toolkit": "^2.1.1",
+    "@ionic/lab": "2.0.17",
+    "@types/jasmine": "~2.8.8",
+    "@types/jasminewd2": "^2.0.8",
+    "@types/node": "^10.14.22",
+    "codelyzer": "^5.2.1",
+    "jasmine-core": "~2.99.1",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~4.1.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~1.1.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "protractor": "~5.4.0",
+    "ts-node": "~8.1.0",
+    "tslint": "~5.16.0",
+    "typescript": "~3.5.3"
+  },
+  "description": "An Ionic project",
+  "cordova": {
+    "plugins": {
+      "com.telerik.plugins.nativepagetransitions": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+      },
+      "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+        "GOOGLE_API_KEY_FOR_ANDROID": "AIzaSyAP_Xy-1QSclKYAvxSmAZO2BuFAWWAlOZQ",
+        "OKHTTP_VERSION": "3.+",
+        "LOCATION_USAGE_DESCRIPTION": "This app requires access to your location for navigation purposes"
+      },
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {},
+      "mx.ferreyra.callnumber": {},
+      "call-number": {},
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
+        "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
+      },
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-file": {},
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  }
+}

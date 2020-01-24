@@ -1,0 +1,39 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-content class="contentBg">
+        <!--Profile-->
+        <div class="driverCardBottom">
+          <ion-card no-padding no-margin slot="fixed" class="driverCard fixed" color="primary">
+            <ion-item lines="none" color="primary" padding-vertical class="driverProfileDetails" (click)="profile()">
+              <div class="driverProfileImage">
+                <ion-avatar slot="start" class="profile">
+                  <img [src]="auth.loggedInUser.profileImg" />
+                </ion-avatar>
+                <div margin-start>
+                  <h3 class="textBold userName" no-margin>{{auth.loggedInUser.name}}</h3>
+                  <span class="lightTextColor drivermemberType userDetails">
+                    <ion-icon name="star"></ion-icon>{{auth.loggedInUser.memberType}} Member
+                  </span>
+                </div>
+              </div>
+            </ion-item>
+          </ion-card>
+        </div>
+        <!--End of Profile-->
+
+        <ion-list lines="none" padding-top>
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+            <ion-item [routerDirection]="'root'" (click)="checkPage(p)">
+              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-label>
+                {{ p.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main [swipeGesture]="false"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="contentBgColor">
+  <ion-list lines="full" margin-top>
+
+    <ion-item class="paddingVertical" *ngFor="let notification of notifications" (click)="notificationAlert(notification)">
+      <ion-avatar slot="start">
+        <img [src]="notification.iconUrl">
+      </ion-avatar>
+
+      <div class="notificationText">
+        <h4 text-capitalize no-margin class="notificationHeading"> {{notification.title}}</h4>
+        <span class="descText" text-nowrap>{{notification.subtitle}}</span>
+      </div>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

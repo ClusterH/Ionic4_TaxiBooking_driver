@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar class="contentBgColor">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div padding-bottom>
+    <div text-center>
+      <h1 class="textBold">Phone Verifications</h1>
+      <span>Enter Your OTP Code here </span>
+    </div>
+
+    <div class="divOuter marginTop">
+      <div class="divInner marginTop">
+        <!-- <ion-input  class="partitioned  marginTop" maxlength="4"   ></ion-input> -->
+        <ion-input type="tel" class="inputBorder  marginTop" #otp1 maxlength="1"  [(ngModel)]="otpInput1" (keyup)="next(otp2,'1')"></ion-input>
+        <ion-input  type="tel" class="inputBorder marginTop" #otp2  maxlength="1" [(ngModel)]="otpInput2"  (keyup)="next(otp3,'2')"></ion-input>
+        <ion-input  type="tel" class="inputBorder marginTop" #otp3  maxlength="1"  [(ngModel)]="otpInput3" (keyup)="next(otp4,'3')"></ion-input>
+        <ion-input   type="tel" class="inputBorder marginTop" #otp4  maxlength="1"  [(ngModel)]="otpInput4" ></ion-input>
+      </div>
+    </div>
+  </div>
+
+  <div padding-vertical padding-horizontal margin-horizontal margin-vertical>
+    <ion-button color="primary" expand="block" class="btnSubmit textBold" (click)="verify()">Verify Now</ion-button>
+  </div>
+
+</ion-content>

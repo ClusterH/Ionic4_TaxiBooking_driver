@@ -1,0 +1,51 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>slides</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content padding>
+  <ion-slides pager="true" [options]="slideOpts" (ionSlideDidChange)="sliderChanges($event)">
+    <ion-slide>
+      <div>
+        <img src="assets/slides7.png">
+        <div>
+          <h1 class="textBold">Accept a Job</h1>
+          <span class="textsliderfont">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab sed iusto laborum
+            exercitationem.</span>
+        </div>
+        <div padding-vertical padding-horizontal margin-horizontal margin-vertical>
+          <ion-button fill="clear" class="textSmall" color="medium" (click)="skip()">Skip</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div>
+        <img src="assets/icon_real_time.png" alt="" class="liveTrackingImg">
+        <div padding-top>
+          <h1 class="textBold">Tracking RealTime</h1>
+          <span class="textsliderfont">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab sed iusto laborum
+            exercitationem.</span>
+        </div>
+        <div padding-vertical padding-horizontal margin-horizontal margin-vertical>
+          <ion-button fill="clear" class="textSmall" color="medium" (click)="skip()">Skip</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div>
+        <img src="assets/slides3.png" alt="" class="liveTrackingImg">
+        <div padding-top>
+          <h1 class="textBold">Earn Money</h1>
+          <span class="textsliderfont">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab sed iusto laborum
+            exercitationem.</span>
+
+        </div>
+        <div padding-vertical padding-horizontal margin-horizontal margin-vertical>
+          <ion-button color="primary" class="btnSubmit textBold" padding-horizontal text-uppercase
+            (click)="locationPage()">Get Started</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" color="dark">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="zig-zag-border-top"></div>
+  <ion-card id="borderimg" *ngFor="let data of userCard">
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail slot="start" class="usercard_thumbnail">
+          <ion-img src={{data.image}} class="image_border"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{data.name}}</h2>
+          <ion-button size="small" class="label_button">{{data.button1}}</ion-button>
+          <ion-button size="small" *ngIf="data.button2" class="label_button">{{data.button2}}</ion-button>
+        </ion-label>
+        <div slot="end">
+          <ion-label>
+            <h2>{{data.amount}}</h2>
+            <p class="userdetail_cardp">{{data.km}}</p>
+          </ion-label>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <p class="userdetail_cardp">PICK UP</p>
+          <h3>{{data.pickup}}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item class="car_item">
+        <ion-label>
+          <p class="userdetail_cardp">DROP OFF</p>
+          <h3>{{data.drop}}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item class="car_item">
+        <ion-label text-wrap text-justify>
+          <p class="userdetail_cardp">NOTED</p>
+          <h4>{{data.noted}}</h4>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>TRIP FARE</ion-list-header>
+      <ion-item class="car_item">
+        <ion-label slot="start">
+          <!-- <p class="userdetail_cardp">TRIP FARE</p> -->
+          <h3>ApplePay</h3>
+          <h3>Discount</h3>
+          <h3>Paid amount</h3>
+        </ion-label>
+        <ion-label slot="end">
+          <h3>{{data.applePay}}</h3>
+          <h3>{{data.discount}}</h3>
+          <h3>{{data.paidamount}}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button expand="block" class="button_black">Cancel</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button expand="block" class="button_yellow">Drop off</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </ion-card>
+  <div class="zig-zag-border-bottom"></div>
+</ion-content>
