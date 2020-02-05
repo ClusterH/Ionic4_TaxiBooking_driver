@@ -54,6 +54,7 @@ export class HomePage implements OnInit {
   totalDistance: any = 0;
   totalDuration: any = 0;
   totalTripCounter: number = 0;
+  totalUpcomingCounter: number = 0;
   totalHour: number;
   totalMin: number;
   totalRating: number;
@@ -72,167 +73,6 @@ export class HomePage implements OnInit {
       opacity: 0.8
     }
   };
-
-  public style = [
-    {
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#f5f5f5'
-        }
-      ]
-    },
-    {
-      elementType: 'labels.icon',
-      stylers: [
-        {
-          visibility: 'off'
-        }
-      ]
-    },
-    {
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161'
-        }
-      ]
-    },
-    {
-      elementType: 'labels.text.stroke',
-      stylers: [
-        {
-          color: '#f5f5f5'
-        }
-      ]
-    },
-    {
-      featureType: 'administrative.land_parcel',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#bdbdbd'
-        }
-      ]
-    },
-    {
-      featureType: 'poi',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee'
-        }
-      ]
-    },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575'
-        }
-      ]
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5'
-        }
-      ]
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e'
-        }
-      ]
-    },
-    {
-      featureType: 'road',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#ffffff'
-        }
-      ]
-    },
-    {
-      featureType: 'road.arterial',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#757575'
-        }
-      ]
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#dadada'
-        }
-      ]
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#616161'
-        }
-      ]
-    },
-    {
-      featureType: 'road.local',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e'
-        }
-      ]
-    },
-    {
-      featureType: 'transit.line',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#e5e5e5'
-        }
-      ]
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#eeeeee'
-        }
-      ]
-    },
-    {
-      featureType: 'water',
-      elementType: 'geometry',
-      stylers: [
-        {
-          color: '#c9c9c9'
-        }
-      ]
-    },
-    {
-      featureType: 'water',
-      elementType: 'labels.text.fill',
-      stylers: [
-        {
-          color: '#9e9e9e'
-        }
-      ]
-    }
-  ];
 
   constructor(
     private router: Router,
@@ -256,8 +96,8 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getcurrentLocations();
-    this.getDirection();
+    // this.getcurrentLocations();
+    // this.getDirection();
     console.log('ngonit');
 
     this.auth.user.subscribe(res => {
@@ -265,6 +105,7 @@ export class HomePage implements OnInit {
       this.did = res.uid;
       this.totalDuration = 0;
       this.totalTripCounter = 0;
+      this.totalUpcomingCounter = 0;
       this.totalEarning = 0;
       this.totalHour = 0;
       this.totalMin = 0;
@@ -274,9 +115,11 @@ export class HomePage implements OnInit {
       this.scheduleRide = null;
       this.scheduleDate = null;
       this.customerId = null;
+      this.reset();
+
     console.log(this.rideAlert);
       
-      this.getHistory();
+      // this.getHistory();
     });
   }
 
@@ -325,6 +168,7 @@ export class HomePage implements OnInit {
     this.totalMin = 0;
     this.totalDistance = 0;
     this.totalRating = 0;
+    this.totalUpcomingCounter = 0;
     this.rideAlert = null;
     this.scheduleRide = null;
     this.scheduleDate = null;
@@ -362,13 +206,6 @@ export class HomePage implements OnInit {
     }, 30000);
 
     if (!this.rideAlert) {
-      // this.afs.collection('customers').doc(this.customerId).valueChanges().subscribe((res: any) => {
-      //   console.log(res);
-        // this.scheduleDate = res.tripSchedule;
-        // this.scheduleRide = res.scheduleRide;
-        // console.log(this.scheduleDate);
-      // });
-
       this.rideAlert = await this.alertController.create({
         header: 'Alert!',
         // message: 'Schedule: ' + this.scheduleDate,
@@ -429,7 +266,6 @@ export class HomePage implements OnInit {
     } 
 
     await this.rideAlert.present();
-
   }
 
   async openActionScheduleRide(res) {
@@ -450,7 +286,6 @@ export class HomePage implements OnInit {
       this.rideAlert = await this.alertController.create({
         header: 'Alert!',
         message: 'Schedule: ' + this.scheduleDate,
-        // message: 'New Ride Available!',
         buttons: [
           {
             text: 'Reject',
@@ -568,6 +403,7 @@ export class HomePage implements OnInit {
         custData: this.userData,
         scheduleRide: false,
         scheduleDate: null,
+        moveSchTOPas: false,
       };
       console.log(obj);
       this.http
@@ -602,7 +438,8 @@ export class HomePage implements OnInit {
         custId: this.customerId,
         custData: this.userData,
         scheduleRide: true,
-        scheduleDate: this.scheduleDate
+        scheduleDate: this.scheduleDate,
+        moveSchTOPas: false,
       };
       console.log(obj);
       this.http
@@ -617,6 +454,8 @@ export class HomePage implements OnInit {
             this.scheduleDate = null;
 
             this.driverService.rideInProgress = false;
+            this.reset();
+
           }
           loader.dismiss();
         });
@@ -624,6 +463,9 @@ export class HomePage implements OnInit {
 
   }
 
+  showUpcomingRides() {
+    this.router.navigate(['history', 'upcoming']);
+  }
 
   requestAccept() {
     this.router.navigate(['customer-detail']);
@@ -634,6 +476,7 @@ export class HomePage implements OnInit {
   }
 
   async getHistory() {
+    console.log('getHistory');
     // if (!this.loader) {
     //   this.loader = await this.driverService.loading('Loading history ...');
     //   this.loader.present();
@@ -650,6 +493,7 @@ export class HomePage implements OnInit {
         this.totalDistance = 0;
         this.totalDuration = 0;
         this.totalEarning = 0;
+        this.totalUpcomingCounter = 0;
 
         for (let i = 0; i < res.length; i++) {
           if(!res[i].schedule) {
@@ -660,8 +504,11 @@ export class HomePage implements OnInit {
             this.totalDuration = this.totalDuration + parseInt(res[i].tripDuration.split('m')[0]);
             this.totalRating = this.totalRating + parseInt(res[i].rating);
             this.totalTripCounter++;
+          } else if (res[i].schedule) {
+            this.totalUpcomingCounter++;
           }
         };
+
         this.totalHour = Math.floor(this.totalDuration/60);
         this.totalMin = Math.abs(this.totalDuration-this.totalHour*60);
         console.log(this.totalHour, this.totalMin, this.totalDuration, this.totalRating, this.totalTripCounter);

@@ -32,9 +32,9 @@
       (mapReady)="mapReady(true, $event)" [styles]="style">
       <agm-marker *ngIf="!driverService.rideInProgress" [latitude]="lat" [longitude]="lng" [markerDraggable]="true" 
         [iconUrl]="markerUrl" (dragEnd)="markerDragEnd($event)"></agm-marker>
-      <agm-circle *ngIf="!driverService.rideInProgress" [latitude]="lat" [longitude]="lng" [radius]="2000"
+      <!-- <agm-circle *ngIf="!driverService.rideInProgress" [latitude]="lat" [longitude]="lng" [radius]="2000"
         [fillColor]="'#DFC033'" [circleDraggable]="false" [editable]="false">
-      </agm-circle>
+      </agm-circle> -->
       <agm-direction *ngIf="driverService.rideInProgress" [origin]="userData.destination"
         [destination]="userData.origin">
       </agm-direction>
@@ -57,6 +57,7 @@
           <img [src]="auth.loggedInUser.profileImg" />
         </ion-avatar>
         <ion-label text-capitalize> <b>{{auth.loggedInUser.name}}</b></ion-label>
+        <ion-button (click)="showUpcomingRides()">Show Upcoming:&nbsp;<b>{{totalUpcomingCounter}}</b></ion-button>
         <span fill="outline" slot="end"> <b>${{totalEarning}}</b></span>
       </ion-item>
 
@@ -101,17 +102,11 @@
           <div>
             <ion-label>{{ userData.name }}</ion-label>
           </div>
-          <!-- <div class="dFlex" align-items-center>
-            <ion-button size="small" color="primary" shape="round" class="card-Chip textBold boxShadow" text-capitalize>
-              Apple pay</ion-button>
-            <ion-button size="small" color="primary" shape="round" class="card-Chip textBold boxShadow" text-capitalize>
-              Discount</ion-button>
-          </div> -->
         </div>
 
         <div float-right>
           <div>
-            <ion-label class="textBold">${{userData.estimateFire}}&nbsp;&nbsp;{{userData.tripDistance}}KM</ion-label>
+            <ion-label class="textBold">${{userData.estimateFire}}&nbsp;&nbsp;{{userData.tripDistance}}</ion-label>
           </div>
           <!-- <div>
             <ion-label class="textBold lightTextColor nowrap">{{userData.tripDistance}}KM</ion-label>

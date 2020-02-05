@@ -19,6 +19,7 @@ import { HistoryPage } from './history.page';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { RatingModule } from 'ngx-rating';
+import { ModalPage } from '../modal/modal.page';
 
 
 const routes: Routes = [
@@ -38,6 +39,8 @@ const routes: Routes = [
     AgmCoreModule,
     AgmDirectionModule
   ],
-  declarations: [HistoryPage]
+  declarations: [HistoryPage, ModalPage],
+  entryComponents: [ModalPage]
+
 })
 export class HistoryPageModule {}

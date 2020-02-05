@@ -27,6 +27,11 @@ const routes: Routes = [
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfilePageModule) },
   { path: 'paymentmethod', loadChildren: () => import('./paymentmethod/paymentmethod.module').then(m => m.PaymentmethodPageModule) },
   { path: 'history', loadChildren: () => import('./history/history.module').then(m => m.HistoryPageModule) },
+
+  {
+    path: 'history/:status',
+    loadChildren: () => import('./history/history.module').then(m => m.HistoryPageModule)
+  },
   { path: 'carddetail', loadChildren: () => import('./carddetail/carddetail.module').then(m => m.CarddetailPageModule) },
   { path: 'invite', loadChildren: () => import('./invite/invite.module').then(m => m.InvitePageModule) },
   { path: 'invitefriends', loadChildren: () => import('./invitefriends/invitefriends.module').then(m => m.InvitefriendsPageModule) },
@@ -51,6 +56,12 @@ const routes: Routes = [
   { path: 'terms-condictions', loadChildren: () => import('./terms-condictions/terms-condictions.module').then(m => m.TermsCondictionsPageModule) },
   { path: 'contact-us', loadChildren: () => import('./contact-us/contact-us.module').then(m => m.ContactUSPageModule) },
   { path: 'approved', loadChildren: () => import('./approved/approved.module').then(m => m.ApprovedPageModule) },
+  // {
+  //   path: 'modal',
+  //   loadChildren: () => import('./modal/modal.module').then( m => m.ModalPageModule)
+  // },
+  { path: 'modal', loadChildren: () => import('./modal/modal.module').then(m => m.ModalPageModule) },
+
 
 
 ];

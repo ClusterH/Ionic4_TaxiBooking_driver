@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end" (click)="goBack()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Details
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-card>
+    <ion-card-content>
+      <div class="contentHead">
+        <span *ngIf="rideInfo && rideInfo.date && !rideInfo.schedule">{{ rideInfo.date.toDate().toUTCString() }}</span>
+        <span *ngIf="rideInfo && rideInfo.date && rideInfo.schedule">{{ rideInfo.date }}</span>
+        <span *ngIf="!rideInfo || !rideInfo.date">Date not available</span>
+        <span>$ {{ rideInfo.fare }}</span>
+      </div>
+      <div class="contentBody">
+        <ion-list>
+          <ion-item>
+            <ion-label class="unwrapped"><strong>Origin:</strong> {{ rideInfo.startAddress }}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="unwrapped"><strong>Destination:</strong> {{ rideInfo.endAddress }}</ion-label>
+          </ion-item>
+         
+          <ion-item>
+            <div class="personal_info">
+              <ion-avatar slot="start">
+                <img [src]="customer.profileImg" />
+              </ion-avatar>
+              
+              <div class="customer_info">
+                <p>name:&nbsp;<strong>{{customer.name}}</strong></p>
+                <p>Email:&nbsp;<strong>{{customer.email}}</strong></p>
+                <p>Phone:&nbsp;<strong>{{customer.phone}}</strong></p>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <div class="startRide" *ngIf="rideInfo.schedule && !driverService.rideInProgress">
+    <ion-button expand="full" (click)="startRide()">Start Ride</ion-button>
+  </div>
+
+  <div class="relative" *ngIf="driverService.rideInProgress">
+    <ion-card slot="fixed" class="userCard">
+      <ion-card-content color="light" no-margin class="userCard-conetnt" *ngIf="!scheduleRide">
+        <div>
+          <div class="userCardFooter">
+            <ion-button expand="block" color="light" class="textBold boxShadow" (click)="completeRide()">Complete Ride
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-footer>
+

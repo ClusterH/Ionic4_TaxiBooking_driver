@@ -38,6 +38,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Camera } from '@ionic-native/camera/ngx';
+import { ModelService } from './modelservice';
+
 import { CustomerRequestPage } from './customer-request/customer-request.page';
 import { environment } from '../environments/environment';
 import { StorageService } from './filestorage.service';
@@ -70,6 +72,7 @@ import { FirestoreService } from './firestore.service';
     StatusBar,
     SplashScreen,
     NativePageTransitions,
+    ModelService,
     Camera,
     CallNumber,
     GoogleMapsAPIWrapper,

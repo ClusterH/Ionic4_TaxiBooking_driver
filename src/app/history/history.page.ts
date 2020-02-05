@@ -8,21 +8,24 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { ModalController, MenuController } from '@ionic/angular';
 import { FirestoreService } from '../firestore.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../auth.service';
+import { ModalPage } from '../modal/modal.page';
 import { DriverStatusService } from '../driver-status.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.page.html',
   styleUrls: ['./history.page.scss']
 })
+
 export class HistoryPage implements OnInit {
   // weekDays: any;
   segmenValue: any;
   starsCount: number;
-
   clicked: any;
   userCard: any = [];
   selected: any;
@@ -34,84 +37,34 @@ export class HistoryPage implements OnInit {
   did: any;
   totalEarning: any = 0;
   totalTripCounter: any = 0;
-
   loader: any;
+
   constructor(
     private fire: FirestoreService,
+    public modalController: ModalController,
     private afs: AngularFirestore,
     private auth: AuthService,
-    public driverService: DriverStatusService
-  ) {
-    
-    this.userCard = [
-      {
-        name: 'Elva Barnet',
-        amount: '$22.50',
-        image: '../../assets/img/user1.jpeg',
-        button1: 'ApplePay',
-        button2: 'Discount',
-        km: '7.2km',
-        pickup: '7958 Swift Village',
-        drop: '105 William St,Chicago,US'
-      },
-      {
-        name: 'Andre Clark',
-        amount: '$28.50',
-        image: '../../assets/img/user2.jpeg',
-        button1: 'ApplePay',
-        km: '4.2km',
-        pickup: '7958 Swift Village',
-        drop: '105 William St,Chicago,US'
-      },
-      {
-        name: 'Elva Barnet',
-        amount: '$28.50',
-        image: '../../assets/img/user3.jpeg',
-        button1: 'ApplePay',
-        km: '1.2km',
-        pickup: '7958 Swift Village',
-        drop: '105 William St,Chicago,US'
-      },
-      {
-        name: 'Elva Barnet',
-        amount: '$25.50',
-        image: '../../assets/img/user1.jpeg',
-        button1: 'ApplePay',
-        button2: 'Discount',
-        km: '2.2km',
-        pickup: '7958 Swift Village',
-        drop: '105 William St,Chicago,US'
-      },
-      {
-        name: 'Elva Barnet',
-        amount: '$20.50',
-        image: '../../assets/img/user2.jpeg',
-        button1: 'ApplePay',
-        km: '6.2km',
-        pickup: '7958 Swift Village',
-        drop: '105 William St,Chicago,US'
-      },
-      {
-        name: 'Andre Clark',
-        amount: '$21.50',
-        image: '../../assets/img/user3.jpeg',
-        button1: 'ApplePay',
-        button2: 'Discount',
-        km: '1.2km',
-        pickup: '7958 Swift Village',
-        drop: '105 William St,Chicago,US'
-      }
-    ];
-  }
+    public driverService: DriverStatusService,
+    public route: ActivatedRoute,
+  ) { }
+
   ngOnInit() {
     // this.selected = this.weekDays[0];
     this.auth.user.subscribe(res => {
       this.did = res.uid;
       this.totalTripCounter = 0;
-      this.segmenValue = 'past';
+
+      this.route.params.subscribe(params => {
+        console.log(params);
+        if (params && params.status == 'upcoming') {
+          this.segmenValue = 'upcoming';
+        } else {
+          this.segmenValue = 'past';
+        }
+      })
+      
       this.getHistory();
     });
-
   }
 
   async getHistory() {
@@ -119,6 +72,7 @@ export class HistoryPage implements OnInit {
       this.loader = await this.driverService.loading('Loading history ...');
       this.loader.present();
     }
+    
     this.afs
       .collection('completedRides', ref =>
         ref.where('driver', '==', `${this.did}`).orderBy('date')
@@ -132,11 +86,9 @@ export class HistoryPage implements OnInit {
             console.log(res[i]);
             this.totalEarning = this.totalEarning + parseInt(res[i].fare,10);
             this.totalTripCounter++;
-
           } else {
             this.upcomingRides.push(res[i]);
             console.log(res[i]);
-
           }
         };
         this.loader.dismiss();
@@ -145,5 +97,14 @@ export class HistoryPage implements OnInit {
 
   segmentValue(event: any) {
     this.segmenValue = event.detail.value;
+  }
+
+  async showInfo(ride) {
+    console.log(ride);
+    const modal = await this.modalController.create({
+      component: ModalPage,
+      componentProps: { rideInfo: ride }
+    });
+    return await modal.present();
   }
 }
