@@ -25,14 +25,14 @@ import { FirestoreService } from '../firestore.service';
 import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-
-
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
+
 export class HomePage implements OnInit {
   public zoom: number = 12;
   public lat: number =0;
@@ -88,16 +88,14 @@ export class HomePage implements OnInit {
     private http: HttpClient,
     private afAuth: AngularFireAuth,
     public afs: AngularFirestore,
+    private callNumber: CallNumber
   ) {
     console.log(driverService.driverStatus);
     this.driveStatus = driverService.driverStatus;
     console.log('construct');
-
   }
 
   ngOnInit() {
-    // this.getcurrentLocations();
-    // this.getDirection();
     console.log('ngonit');
 
     this.auth.user.subscribe(res => {
@@ -116,10 +114,7 @@ export class HomePage implements OnInit {
       this.scheduleDate = null;
       this.customerId = null;
       this.reset();
-
-    console.log(this.rideAlert);
-      
-      // this.getHistory();
+      console.log(this.rideAlert);
     });
   }
 
@@ -157,9 +152,9 @@ export class HomePage implements OnInit {
           console.log(res);
         });
       }
-
     });
   }
+
   reset() {
     this.totalDuration = 0;
     this.totalTripCounter = 0;
@@ -179,9 +174,7 @@ export class HomePage implements OnInit {
   }
 
   driverNotResponding(customerId) {
-    // const obj = {};
     console.log(customerId);
-    // obj['uid'] = customerId;
     
     this.http
       .post(
@@ -276,13 +269,6 @@ export class HomePage implements OnInit {
     }, 30000);
 
     if (!this.rideAlert && this.scheduleDate !== null) {
-      // this.afs.collection("customers").doc(this.customerId).valueChanges().subscribe((res: any) => {
-      //   console.log(res);
-      //   this.scheduleDate = res.tripSchedule;
-      //   // this.scheduleRide = res.scheduleRide;
-      //   console.log( this.scheduleDate);
-      // });
-
       this.rideAlert = await this.alertController.create({
         header: 'Alert!',
         message: 'Schedule: ' + this.scheduleDate,
@@ -329,7 +315,6 @@ export class HomePage implements OnInit {
                 )
                 .subscribe(res => {
                   console.log('Res', res)
-                  // const parsedObj = JSON.parse(res['_body']);
                   const parsedObj = res;
                   console.log(parsedObj);
                   loader.dismiss();
@@ -342,9 +327,7 @@ export class HomePage implements OnInit {
         ]
       });
     } 
-
     await this.rideAlert.present();
-
   }
 
   mapReady(a, event) {
@@ -369,18 +352,12 @@ export class HomePage implements OnInit {
   driverStatusChange(event, val) {
     console.log('status', this.driveStatus, event, event.target.value, val);
     this.driverService.driverStatus = this.driveStatus;
-
-
     this.afAuth.auth.onAuthStateChanged(user => {
       console.log(user)
       this.fire.changeStatus(this.driveStatus, user.uid).then(res => {
         console.log(res);
       });
     });
-  }
-
-  goToCustomerDetail() {
-    this.router.navigate(['customer-detail', { driverOrigin: this.locationOrigin, userOrigin: this.userData.origin }]);
   }
 
   getDirection() {
@@ -417,13 +394,11 @@ export class HomePage implements OnInit {
             this.scheduleRide = false;
             this.scheduleDate = null;
             this.driverService.rideInProgress = false;
-            
             this.reset();
           }
           loader.dismiss();
         });
     });
-
   }
 
   async uncompletedscheduleRide() {
@@ -455,12 +430,10 @@ export class HomePage implements OnInit {
 
             this.driverService.rideInProgress = false;
             this.reset();
-
           }
           loader.dismiss();
         });
     });
-
   }
 
   showUpcomingRides() {
@@ -475,12 +448,20 @@ export class HomePage implements OnInit {
     this.router.navigate(['customerRequest']);
   }
 
+  userCall() {
+    console.log('call');
+    this.callNumber.callNumber(this.userData.phone, true)
+      .then(res => console.log('Launched dialer!', res))
+      .catch(err => console.log('Error launching dialer', err));
+  }
+
+  userMessage() {
+    console.log('user Message');
+    this.router.navigate(['chat', this.userData]);
+  }
+
   async getHistory() {
     console.log('getHistory');
-    // if (!this.loader) {
-    //   this.loader = await this.driverService.loading('Loading history ...');
-    //   this.loader.present();
-    // }
     this.afs
       .collection('completedRides', ref =>
         ref.where('driver', '==', `${this.did}`)
@@ -499,7 +480,6 @@ export class HomePage implements OnInit {
           if(!res[i].schedule) {
             console.log(res[i].schedule);
             this.totalEarning = this.totalEarning + parseInt(res[i].fare);
-            // this.totalDistance = this.totalDistance + parseInt(res[i].tripDistance);
             this.totalDistance = this.totalDistance + parseInt(res[i].tripDistance);
             this.totalDuration = this.totalDuration + parseInt(res[i].tripDuration.split('m')[0]);
             this.totalRating = this.totalRating + parseInt(res[i].rating);
@@ -515,7 +495,6 @@ export class HomePage implements OnInit {
         if(this.totalTripCounter === 0) {
           this.totalRating = 0;
         } else {
-          // this.totalRating = Number((this.totalRating/this.totalTripCounter).toFixed(1));
           this.totalRating = Math.floor(this.totalRating/this.totalTripCounter);
         }
         let value = {rating: this.totalRating };
@@ -525,8 +504,6 @@ export class HomePage implements OnInit {
         }).catch(err => {
           console.log(err.message);
         });
-
-        // this.loader.dismiss();
       });
   }
 

@@ -24,7 +24,6 @@
       <ion-label class="textBold">You are Offline</ion-label>
     </ion-item>
   </div>
-  
 
   <div>
     <!-- You can show the booked ride full route or just the starting point as your business logic suggests -->
@@ -32,9 +31,7 @@
       (mapReady)="mapReady(true, $event)" [styles]="style">
       <agm-marker *ngIf="!driverService.rideInProgress" [latitude]="lat" [longitude]="lng" [markerDraggable]="true" 
         [iconUrl]="markerUrl" (dragEnd)="markerDragEnd($event)"></agm-marker>
-      <!-- <agm-circle *ngIf="!driverService.rideInProgress" [latitude]="lat" [longitude]="lng" [radius]="2000"
-        [fillColor]="'#DFC033'" [circleDraggable]="false" [editable]="false">
-      </agm-circle> -->
+      
       <agm-direction *ngIf="driverService.rideInProgress" [origin]="userData.destination"
         [destination]="userData.origin">
       </agm-direction>
@@ -93,32 +90,50 @@
       </ion-fab-button>
     </ion-fab>
     <ion-card slot="fixed" class="userCard">
-      <ion-card-header color="light" class="userCardHeader dFlex">
-        <ion-thumbnail>
-          <img [src]="userData.profileImg" class="userIcon" />
-        </ion-thumbnail>
+      <ion-card-header color="light" class="userCardHeader">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" class="dFlex" align-items-center>
+              <ion-thumbnail>
+                <img [src]="userData.profileImg" class="userIcon" />
+              </ion-thumbnail>
+            </ion-col>
 
-        <div padding-horizontal>
-          <div>
-            <ion-label>{{ userData.name }}</ion-label>
-          </div>
-        </div>
+            <ion-col size="6" class="dFlex" align-items-center>
+              <div>
+                <ion-row><ion-label>{{ userData.name }}</ion-label></ion-row>
+                <ion-row>
+                  <ion-label class="textBold">{{userData.tripDistance}}&nbsp;&nbsp;${{userData.estimateFire}}</ion-label>
+                </ion-row>
+              </div>
+            </ion-col>
+            <ion-col size="3">
+              <div>
+                <ion-row>
+                  <ion-col>
+                    <ion-button class="detailsBtn userCall" padding-horizontal (click)="userCall()">
+                      <div padding class="contactDetails">
+                        <ion-icon name="call" class="contactIcon"></ion-icon>
+                      </div>
+                    </ion-button>
+                 
+                    <ion-button class="detailsBtn userMsg" padding-horizontal (click)="userMessage()">
+                      <div padding class="contactDetails">
+                        <ion-icon name="chatbubbles" class="contactIcon"></ion-icon>
+                      </div>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+          </ion-row>
 
-        <div float-right>
-          <div>
-            <ion-label class="textBold">${{userData.estimateFire}}&nbsp;&nbsp;{{userData.tripDistance}}</ion-label>
-          </div>
-          <!-- <div>
-            <ion-label class="textBold lightTextColor nowrap">{{userData.tripDistance}}KM</ion-label>
-          </div> -->
-          <div *ngIf="scheduleRide && !(scheduleDate === null)">
-            <ion-label class="textBold lightTextColor nowrap">{{scheduleDate}}</ion-label>
-          </div>
-          <div>
-            <ion-button expand="full" fill="clear" color="success" size="small" class="customer_detail_button"
-              (click)="goToCustomerDetail()">Detail</ion-button>
-          </div>
-        </div>
+          <ion-row  *ngIf="scheduleRide && !(scheduleDate === null)">
+            <ion-col>
+              <ion-label class="textBold lightTextColor nowrap">Schedule Date:&nbsp;{{scheduleDate}}</ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-header>
 
       <ion-card-content color="light" no-margin class="userCard-conetnt" *ngIf="!scheduleRide">

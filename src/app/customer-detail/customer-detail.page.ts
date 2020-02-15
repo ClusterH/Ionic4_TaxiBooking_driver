@@ -7,8 +7,6 @@
  * LICENSE.md file in the root directory of this source tree.
  */
 
-
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -17,12 +15,12 @@ import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-na
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-customer-detail',
   templateUrl: './customer-detail.page.html',
   styleUrls: ['./customer-detail.page.scss'],
 })
+
 export class CustomerDetailPage implements OnInit {
   public tripFare: Array<any> = [];
   public userDeatils: any = {}
@@ -70,7 +68,6 @@ export class CustomerDetailPage implements OnInit {
       dropOffLocation: '105 William, US',
       checked: false
     }
-
   }
 
   getnavigations() {
@@ -101,7 +98,6 @@ export class CustomerDetailPage implements OnInit {
   userMessage() {
     console.log('user Message');
     this.route.navigate(['chat'])
-
   }
 
   async userCancel() {

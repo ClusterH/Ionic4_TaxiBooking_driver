@@ -60,9 +60,7 @@ export class ModalPage implements OnInit {
     console.log('ok');
     this.http
       .post(
-        'https://us-central1-iondriverhapp.cloudfunctions.net/acceptRide',
-        { custId: this.rideInfo.customer }
-      )
+        'https://us-central1-iondriverhapp.cloudfunctions.net/acceptReRide', this.rideInfo)
       .subscribe(res => {
         console.log('Res', res)
         this.userData = res;

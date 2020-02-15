@@ -7,9 +7,6 @@
  * LICENSE.md file in the root directory of this source tree.
  */
 
-
-
-
 .welcome-card ion-img {
   max-height: 35vh;
   overflow: hidden;
@@ -22,11 +19,9 @@
 }
 agm-map {
   height:92vh;
-
   .gm-svpc {
     display: none;
-} 
-
+  } 
 }
 .gmnoprint {
   display: none !important;
@@ -81,13 +76,10 @@ font-size: 26px;
   .detailsLabel{
     font-size: 18px;
   }
- 
 }
-
 
 .userlocationIcon{
   bottom: 300px;
-
   ion-fab-button {
     --background: #fff;
     --color: #000;
@@ -95,7 +87,6 @@ font-size: 26px;
     width: 40px;
   }
 }
-
 
 .userCard{
   position: absolute;
@@ -109,7 +100,7 @@ font-size: 26px;
 
 .userCardHeader{
   box-shadow: 2px 2px 2px #e8e4e4;
-
+  padding: 0px !important;
 }
 
 .userDetails{
@@ -123,16 +114,10 @@ font-size: 26px;
   padding-bottom: 0;
 }
   .userIcon{
-    // width: 40px;
-    // height: 40px;
     margin: 2%;
     margin-left: 9%;
     border: 1px solid #b9b1b1;
   }
-  // .userCardFooter{
-  //   float: right;
-  // }
-
   .paddingVertical{
     padding: 10px 0px;
   }
@@ -156,6 +141,24 @@ font-size: 26px;
 .userCard-conetnt{
   padding-bottom: 0;
   padding-top: 10px;
+}
+
+.detailsBtn {
+  height: 24px;
+  width: 24px;
+  --border-radius: 5px;
+}
+.userCall{
+  --background: #4AE6B3;
+}
+
+.userMsg{
+  --background: #4051FF;
+}
+
+.contactIcon{
+  font-size: 14px;
+  color: #fff;
 }
 
 @-webkit-keyframes mymove {
